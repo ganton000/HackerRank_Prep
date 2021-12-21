@@ -73,3 +73,31 @@ var res = iter_tot < rec_tot;
 
 console.log('Is iterative approach quicker than Recursive?: ' + res);
 console.log('Approaches differ by: ' + (rec_tot - iter_tot) + ' milliseconds.');
+
+
+// Modifying above code to computer (a^b)%M
+
+const iter_power_modulo = (a,b, M) =>{
+  let res = 1;
+  while (b>0){
+    if (b%2 == 1) res = (res*a)%M;
+    a = (a*a)%M;
+    b = parseInt(b/2);
+  }
+  return res;
+};
+
+console.log(iter_power_modulo(3,11,5));
+
+// Fermat's litter theorem: a^{p-1} = 1 (mod p), where p is prime.
+//Note a^{p-1} = 1 (mod p) is equivalent to a^p = a (mod p).
+//a^{p-1} = 1 (mod p) also implies that a^{p-2} = 1/a (a^{-1}) (mod p)
+
+const inverse = (a, p) =>{
+  return iter_power(a, p-2) //returns modulo inverse
+};
+
+
+console.log(inverse(3,10));
+//This has complexity O(log p).
+//
